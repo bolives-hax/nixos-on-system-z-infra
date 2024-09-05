@@ -10,6 +10,7 @@
       system = "x86_64-linux";
       modules = [
 	  ./hardware-configuration.nix
+	  ./modules/hydra.nix
         dec.nixosModules.default
         {
 	 boot.kernelParams = [ "console=ttyS0,115200n8" ];
