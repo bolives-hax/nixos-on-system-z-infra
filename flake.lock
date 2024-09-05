@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "dec": {
+      "locked": {
+        "lastModified": 1725566967,
+        "narHash": "sha256-5iIa+J7jGarUpju9w6iQUqDgL8+g2qXB4i4+UdwJtyo=",
+        "owner": "bolives-hax",
+        "repo": "nixos-remote-luks-decryptor",
+        "rev": "8d310245c3f2d7cc09d7c829e88c97c65165475b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bolives-hax",
+        "ref": "debug",
+        "repo": "nixos-remote-luks-decryptor",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1725503534,
+        "narHash": "sha256-hd1eRyPtTkRnAPYpnEfzugQwAifVYMmOR3z+MTTSw+g=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "fcb54ddcc974cff59bdfb7c1ac9e080299763d2d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "dec": "dec",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
