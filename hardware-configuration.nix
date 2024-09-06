@@ -4,11 +4,10 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "uhci_hcd" "sd_mod" ];
+  boot.initrd.availableKernelModules =
+    [ "ehci_pci" "ahci" "uhci_hcd" "sd_mod" ];
   boot.initrd.kernelModules = [
     "e1000"
     "e1000e"
@@ -28,43 +27,43 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
-      fsType = "btrfs";
-      options = [ "subvol=root" ];
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+    fsType = "btrfs";
+    options = [ "subvol=root" ];
+  };
 
   #boot.initrd.luks.devices."root".device = "/dev/md/md_root";
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "noatime" ];
-    };
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+    fsType = "btrfs";
+    options = [ "subvol=nix" "compress=zstd" "noatime" ];
+  };
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" ];
-    };
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+    fsType = "btrfs";
+    options = [ "subvol=nix" "compress=zstd" ];
+  };
 
-  fileSystems."/torrents" =
-    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
-      fsType = "btrfs";
-      options = [ "subvol=torrents" ];
-    };
+  fileSystems."/torrents" = {
+    device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+    fsType = "btrfs";
+    options = [ "subvol=torrents" ];
+  };
 
-  fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
-      fsType = "btrfs";
-      options = [ "subvol=var" "compress=zstd" ];
-    };
+  fileSystems."/var" = {
+    device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+    fsType = "btrfs";
+    options = [ "subvol=var" "compress=zstd" ];
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0370-7FCF";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/0370-7FCF";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
 
   swapDevices = [ ];
 
@@ -77,5 +76,6 @@
   # networking.interfaces.eno1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 }
