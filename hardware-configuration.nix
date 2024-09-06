@@ -8,50 +8,56 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "uhci_hcd" "sd_mod" "e1000" "e1000e" ];
+  boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "uhci_hcd" "sd_mod" ];
   boot.initrd.kernelModules = [
-  "e1000"
-  "e1000e"
-  "raid1"
-  "raid10"
-  "raid0"
-  "linear"
-  "raid456"
-  "multipath"
-  "sd_mod"
-  "scsi_mod"
-  "dm_mod"
-  "dm_crypt"
-  "ahci"
-  "ehci_hcd"
+    "e1000"
+    "e1000e"
+    "raid1"
+    "raid10"
+    "raid0"
+    "linear"
+    "raid456"
+    "multipath"
+    "sd_mod"
+    "scsi_mod"
+    "dm_mod"
+    "dm_crypt"
+    "ahci"
+    "ehci_hcd"
   ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/57b91b2f-33ea-4055-badc-9a9a48b623fe";
+    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
       fsType = "btrfs";
       options = [ "subvol=root" ];
     };
 
-  #boot.initrd.luks.devices."root".device = "/dev/md127";
+  #boot.initrd.luks.devices."root".device = "/dev/md/md_root";
+
+  fileSystems."/nix" =
+    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+      fsType = "btrfs";
+      options = [ "subvol=nix" "compress=zstd" "noatime" ];
+    };
+
+  fileSystems."/home" =
+    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
+      fsType = "btrfs";
+      options = [ "subvol=nix" "compress=zstd" ];
+    };
 
   fileSystems."/torrents" =
-    { device = "/dev/disk/by-uuid/57b91b2f-33ea-4055-badc-9a9a48b623fe";
+    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
       fsType = "btrfs";
       options = [ "subvol=torrents" ];
     };
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/57b91b2f-33ea-4055-badc-9a9a48b623fe";
+  fileSystems."/var" =
+    { device = "/dev/disk/by-uuid/ae5c3fb0-68b8-4e6d-ba02-6c02321d46b9";
       fsType = "btrfs";
-      options = [ "subvol=nix" ];
-    };
-
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/57b91b2f-33ea-4055-badc-9a9a48b623fe";
-      fsType = "btrfs";
-      options = [ "subvol=home" ];
+      options = [ "subvol=var" "compress=zstd" ];
     };
 
   fileSystems."/boot" =

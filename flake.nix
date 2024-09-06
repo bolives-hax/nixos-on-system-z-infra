@@ -10,7 +10,7 @@
       system = "x86_64-linux";
       modules = [
 	  ./hardware-configuration.nix
-	  ./modules/hydra.nix
+	  #./modules/hydra.nix
         dec.nixosModules.default
         {
 	 boot.kernelParams = [ "console=ttyS0,115200n8" ];
@@ -27,8 +27,7 @@
 	 boot.initrd.services.swraid = {
     		enable = true;
 		mdadmConf = ''
-		ARRAY /dev/md/md_root level=raid0 num-devices=4 metadata=1.2 name=s26508:md_root UUID=a452695c:5f0b1a14:b9e67879:007b6dab
-   devices=/dev/sda3,/dev/sdb3,/dev/sdc3,/dev/sdd3
+		ARRAY /dev/md/md_root metadata=1.2 name=s26508:md_root UUID=a452695c:5f0b1a14:b9e67879:007b6dab
    		'';
 
 	  };
@@ -66,7 +65,8 @@
             ssh = {
               authorizedKeys = [
                 "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCYdEdmbD/hFDNhv1kBSQhfsIpb8jOQwiIGzfJkCjBchDs3uvsYYDj8imUThrSr4zn/P5/dcSuMFvFlx/CcCWx5/KMNxgArXb6PzYzRKfyzKtsKjZtQIaO4c/7fm9BzO9HuWFZzd3FCxqKbBUxYRMWDV8catvIDxD50Se5hPrTd7vQPFpKVf7MmLnLpNcn894WTSN86U5pZkXDrDxOWyv+lhbPzPgyXnQTWWTUlA9p4bU3tSi5iQBiH36voIbKckOIB2+m2dLBbNFs5B6d0SJDpH/xFCN/xqmpinGCNoRLqk0bKnfW4vKBVJ2h0YC0MJA9q+FjmAwCxC10azHNk8MFU2QlOawWp6gRimdmKcHc4DOcqt3ldeHOVORELy01Yy+FU0aOLHBaepSh8eB0GVjFHna4dexJ/rEzOa3ibYUSAcPN35wE0DsjZ981UjlouDl/isCm7nhqxg1j6Yt17rwySGnC8rswtMJ6qYAosrnIDV8rSOJuGArFk6635mHcCfzM= flandre@nixos"
-                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQBYWXJmnnhhQlkn0yht1vAZRk023hWlUDtWX3uKsEq2mz6oo91vMhkUMg68FMUxC6nrkursCJJHfAW44wG2kXVYqutHPMa1kD5ZoSDxy/ijt6mWqH9j5xbPjeMzNG++YJf3iYtlc+3MYsdc8mH87k4dJbH+ByVZEud2+tUOqeQcEreQpXDoKJNx+lEqSvBBbIh02ORZqkznSko20nUt9x8YEP4BIvlEkSK7Ka89nnAd33qFKH+OQAun0lz/PL2yWvhMPtyzJW8zmbnnULH/H6MzzWcZwAIiMEiEWkMwIVDtmpSO2u4UYWXpQ3SSKh7uPuudynemMpBCCVQ39naGW1XA0RmmnOPnQWak5aCKNbze61mxAADYrDfj34/RENsQGSf9p8pDG3yoErrHOrDvvM9bC5jp2FOxrocpnwKRmI+y7Q0orAjTVStNSdlmiPXAMLjYQUjK4/9mzjDFkCquuQhQHW20lxWKd7cwTqNOhHi3SFBdANOq5fOtrWdbQLT9U= root@c3-small-x86-01"
+
+		"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCWG77EEgzdtf06bEGQRILRSqA3tSMlYjoh1mY0BZm21mhFb9JiEOIDoQ8ruMXEwASrWcFUo7a6ADpNWRrp8hNjrbHjukSQmReqT4ZPShrOpfy7O96+JiGZAN0mt2reLJ3t+vFyqP+rFTRQ3yOpCRVNJBNjJVymTKhVLYx9llJJP3VSy72rDZGEWt7ZJdINEwGYULHyribG/i2HRuG+xvVkqMDAp6Y12efln8de2zyDU7y0bE1mTU4Dd8WoXYQau1QNnGgddG2nwT11oS20550153hRbZOOJM6ExLqXHHeTCbS/ipNpRCMpcL+dcJBW2sMaMvyEB5FvMyh3yHJQaxmJcPG8yZK7y2oZrdaRMb08UNd84RhCW0dwXE9tZtGZHE6iCxM6v5U7RC3XHVD3xLu+VCl04idG88mBcOE4M576U+agLQbH78+h9D/ydGnYlZTo1WHScK5Qclh0Oiam8YDt+kFvHwnsxkfDCsA3ZBZj9LUOsCicYDSO8pSXWfeBCAU= root@m3-small-x86-01"
               ];
               hostKeys = [
                   "/etc/secrets/initrd/ssh_host_rsa_key"
@@ -83,7 +83,8 @@
             password = "flandre";
             openssh.authorizedKeys.keys = [
                 "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCYdEdmbD/hFDNhv1kBSQhfsIpb8jOQwiIGzfJkCjBchDs3uvsYYDj8imUThrSr4zn/P5/dcSuMFvFlx/CcCWx5/KMNxgArXb6PzYzRKfyzKtsKjZtQIaO4c/7fm9BzO9HuWFZzd3FCxqKbBUxYRMWDV8catvIDxD50Se5hPrTd7vQPFpKVf7MmLnLpNcn894WTSN86U5pZkXDrDxOWyv+lhbPzPgyXnQTWWTUlA9p4bU3tSi5iQBiH36voIbKckOIB2+m2dLBbNFs5B6d0SJDpH/xFCN/xqmpinGCNoRLqk0bKnfW4vKBVJ2h0YC0MJA9q+FjmAwCxC10azHNk8MFU2QlOawWp6gRimdmKcHc4DOcqt3ldeHOVORELy01Yy+FU0aOLHBaepSh8eB0GVjFHna4dexJ/rEzOa3ibYUSAcPN35wE0DsjZ981UjlouDl/isCm7nhqxg1j6Yt17rwySGnC8rswtMJ6qYAosrnIDV8rSOJuGArFk6635mHcCfzM= flandre@nixos"
-                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDQBYWXJmnnhhQlkn0yht1vAZRk023hWlUDtWX3uKsEq2mz6oo91vMhkUMg68FMUxC6nrkursCJJHfAW44wG2kXVYqutHPMa1kD5ZoSDxy/ijt6mWqH9j5xbPjeMzNG++YJf3iYtlc+3MYsdc8mH87k4dJbH+ByVZEud2+tUOqeQcEreQpXDoKJNx+lEqSvBBbIh02ORZqkznSko20nUt9x8YEP4BIvlEkSK7Ka89nnAd33qFKH+OQAun0lz/PL2yWvhMPtyzJW8zmbnnULH/H6MzzWcZwAIiMEiEWkMwIVDtmpSO2u4UYWXpQ3SSKh7uPuudynemMpBCCVQ39naGW1XA0RmmnOPnQWak5aCKNbze61mxAADYrDfj34/RENsQGSf9p8pDG3yoErrHOrDvvM9bC5jp2FOxrocpnwKRmI+y7Q0orAjTVStNSdlmiPXAMLjYQUjK4/9mzjDFkCquuQhQHW20lxWKd7cwTqNOhHi3SFBdANOq5fOtrWdbQLT9U= root@c3-small-x86-01"
+		"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCWG77EEgzdtf06bEGQRILRSqA3tSMlYjoh1mY0BZm21mhFb9JiEOIDoQ8ruMXEwASrWcFUo7a6ADpNWRrp8hNjrbHjukSQmReqT4ZPShrOpfy7O96+JiGZAN0mt2reLJ3t+vFyqP+rFTRQ3yOpCRVNJBNjJVymTKhVLYx9llJJP3VSy72rDZGEWt7ZJdINEwGYULHyribG/i2HRuG+xvVkqMDAp6Y12efln8de2zyDU7y0bE1mTU4Dd8WoXYQau1QNnGgddG2nwT11oS20550153hRbZOOJM6ExLqXHHeTCbS/ipNpRCMpcL+dcJBW2sMaMvyEB5FvMyh3yHJQaxmJcPG8yZK7y2oZrdaRMb08UNd84RhCW0dwXE9tZtGZHE6iCxM6v5U7RC3XHVD3xLu+VCl04idG88mBcOE4M576U+agLQbH78+h9D/ydGnYlZTo1WHScK5Qclh0Oiam8YDt+kFvHwnsxkfDCsA3ZBZj9LUOsCicYDSO8pSXWfeBCAU= root@m3-small-x86-01"
+		"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXTaFR70HlHfuK5nbJSXBFnNZC2oq3a/FjylUPivH7y root@m3-small-x86-01"
             ];
           };
           networking.defaultGateway = {
